@@ -19,8 +19,8 @@ public class EmitLogs {
             channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.DIRECT);
 
             for(int i = 0; i < 10; i++) {
-                Thread.sleep(1000);
                 sendMessage(channel);
+                Thread.sleep(1000);
             }
         }
     }
