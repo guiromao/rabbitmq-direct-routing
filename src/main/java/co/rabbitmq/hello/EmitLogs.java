@@ -19,15 +19,15 @@ public class EmitLogs {
             channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.DIRECT);
 
             for(int i = 0; i < 10; i++) {
-                sendMessage(channel);
+                sendMessage(channel, (i + 1));
                 Thread.sleep(1000);
             }
         }
     }
 
-    private static void sendMessage(Channel channel) {
+    private static void sendMessage(Channel channel, int number) {
         String severity = generateSeverity();
-        String message = createMessage(severity);
+        String message = createMessage(severity, number);
         try {
             //Setting MessageProperties for the message to be saved onto the disk, in RabbitMQ
             channel.basicPublish(EXCHANGE_NAME, severity, MessageProperties.PERSISTENT_TEXT_PLAIN, message.getBytes());
@@ -38,8 +38,8 @@ public class EmitLogs {
         }
     }
 
-    private static String createMessage(String severity) {
-        return severity + ": Message with random number " +
+    private static String createMessage(String severity, int num) {
+        return severity + ": " + num + ") Message with random number " +
                 ((int) Math.round(Math.random() * 100)) + randomDots();
     }
 
