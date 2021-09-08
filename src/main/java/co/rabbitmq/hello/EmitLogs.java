@@ -44,7 +44,7 @@ public class EmitLogs {
     }
 
     private static String generateSeverity() {
-        int numberSeverity = (int) Math.round(Math.random() * 2);
+        int numberSeverity = (int) Math.round(Math.random() * Severity.values().length);
         return Severity.values()[numberSeverity].getDescription();
     }
 
